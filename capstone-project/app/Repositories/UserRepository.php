@@ -9,6 +9,22 @@ class UserRepository
     {
         return User::create($data);
     }
+
+    public function findByEmail(string $email)
+    {
+        return 'findByEmail';
+    }
+
+    public function updateProfile(User $user, array $data): User
+    {
+        $user->update($data);
+
+        return $user->fresh();
+    }
+    public function changePassword(User $user, array $data)
+    {
+        return 'updatePassword';
+    }
 }
 
 // talk with database

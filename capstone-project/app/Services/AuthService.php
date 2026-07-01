@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Http\Resources\UserResource;
+use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -48,6 +49,13 @@ class AuthService
             'user' => new UserResource($user),
             'token' => $token
         ];
+    }
+
+    public function updateProfile(User $user, array $data): User
+    {
+        return DB::transaction(function () use ($user, $data) {
+           return $this->userRepository->updateProfile($user, $data);
+        });
     }
 
     //talk with business logic
